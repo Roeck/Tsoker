@@ -1,5 +1,6 @@
 import { ChatEngine } from 'react-chat-engine'
 
+import ChatFeed from './components/ChatFeed';
 import './App.css';
 
 const App = () => {
@@ -9,7 +10,8 @@ const App = () => {
             projectID="5320b691-dc8c-490c-87e0-10e0446090f4"
             userName="RonB"
             userSecret="123"
-            />
+            renderChatFeed={(chatAppProps) => <ChatFeed {... chatAppProps} />}
+        />
     )
 }
 
