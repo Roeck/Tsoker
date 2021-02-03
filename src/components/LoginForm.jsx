@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-const projectID = '1b7801d6-8a66-4be4-a442-89219d833dfc';
+const projectID = '5ee56f8b-e74e-43e9-8105-092ceca76727';
 
 const Modal = () => {
   const [username, setUsername] = useState('');
@@ -11,10 +11,16 @@ const Modal = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const authObject = { 'Project-ID': projectID, 'User-Name': username, 'User-Secret': password };
+    const authObject = {
+      'Project-ID': projectID,
+      'User-Name': username,
+      'User-Secret': password
+    };
 
     try {
-      await axios.get('https://api.chatengine.io/chats', { headers: authObject });
+      await axios.get('https://api.chatengine.io/chats', {
+        headers: authObject
+      });
 
       localStorage.setItem('username', username);
       localStorage.setItem('password', password);
@@ -22,27 +28,40 @@ const Modal = () => {
       window.location.reload();
       setError('');
     } catch (err) {
-      setError('Incorrect credentials!');
+      setError('Oops, incorrect credentials.');
     }
   };
 
   return (
-    <div className="wrapper">
-      <div className="form">
-        <h1 className="title">Tsoker</h1>
+    <div className='wrapper'>
+      <div className='form'>
+        <h1 className='title'>Chat Application</h1>
         <form onSubmit={handleSubmit}>
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} className="input" placeholder="Username" required />
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="input" placeholder="Password" required />
-          <div align="center">
-            <button type="submit" className="button">
+          <input
+            type='text'
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className='input'
+            placeholder='Username'
+            required
+          />
+          <input
+            type='password'
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className='input'
+            placeholder='Password'
+            required
+          />
+          <div align='center'>
+            <button type='submit' className='button'>
               <span>Start chatting</span>
             </button>
           </div>
-          <h2 className="error">{error}</h2>
         </form>
+        <h1>{error}</h1>
       </div>
     </div>
-
   );
 };
 
